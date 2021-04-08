@@ -1710,6 +1710,7 @@ if [ ! -z $1 ]; then
 		sudo systemctl enable display.service >/dev/null 2>&1
 		sudo systemctl enable user_startup.service >/dev/null 2>&1
 		sudo systemctl enable update.service >/dev/null 2>&1
+		sudo systemctl enable usbrestore.service >/dev/null 2>&1
 		sudo systemctl enable usbdetect.service >/dev/null 2>&1
 		sudo systemctl enable daymode.timer >/dev/null 2>&1
 		sudo systemctl enable nightmode.timer >/dev/null 2>&1
