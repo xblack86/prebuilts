@@ -2695,11 +2695,13 @@ if [ ! -z $1 ]; then
 		sudo sed -i '/./,/^$/!d' /boot/config.txt
 		sudo sed -i '/./,/^$/!d' /etc/rc.local
 		sudo sed -i 's/^rfkill block bluetooth.*//' /etc/rc.local
+		sudo sed -i 's/^exit 0.*//' /etc/rc.local
 		sudo sed -i '/./,/^$/!d' /etc/rc.local
 		sudo sh -c "echo '' >> /boot/config.txt"
 		sudo sh -c "echo '# Bluetooth' >> /boot/config.txt"
 		sudo sh -c "echo 'dtoverlay=pi3-disable-bt' >> /boot/config.txt"
 		sudo sh -c "echo 'rfkill block bluetooth' >> /etc/rc.local"
+		sudo sh -c "echo 'exit 0' >> /etc/rc.local"
 		sudo systemctl disable hciuart >/dev/null 2>&1
 		sudo systemctl disable bluetooth >/dev/null 2>&1
 		sudo systemctl disable ofono >/dev/null 2>&1
