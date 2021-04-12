@@ -70,7 +70,7 @@ function cs_audio_rpi() {
     sudo sed -i '/./,/^$/!d' /boot/config.txt
     sudo sh -c "echo '' >> /boot/config.txt"
     sudo sh -c "echo '# Audio Setup' >> /boot/config.txt"
-    sudo sh -c "echo 'dtparam=audio=on' >> /boot/config.txt"
+    sudo sh -c "echo 'dtparam=audio=off' >> /boot/config.txt"
     sudo sh -c "rm -f /boot/crankshaft/alsactl.state"
 }
 
@@ -1889,7 +1889,7 @@ if [ ! -z $1 ]; then
 	    udev)
 		touch udev_updating
 		sudo rm /tmp/51-android.rules.md5 > /dev/null 2>&1
-		sudo wget -q -O /tmp/51-android.rules.md5 --no-check-certificate https://raw.githubusercontent.com/opencardev/prebuilts/master/udev/51-android.rules.md5
+		sudo wget -q -O /tmp/51-android.rules.md5 --no-check-certificate https://raw.githubusercontent.com/xblack86/prebuilts/master/udev/51-android.rules.md5
                 REMOTE=$(cat /tmp/51-android.rules.md5 | awk {'print $1'})
 		LOCAL=$(md5sum /etc/udev/rules.d/51-android.master | awk {'print $1'})
                 cs_echo "New file:     $REMOTE"
@@ -1905,7 +1905,7 @@ if [ ! -z $1 ]; then
 		else
                     cs_systemrw
 		    # get source file
-		    sudo wget -q --no-check-certificate -O /etc/udev/rules.d/51-android.master https://raw.githubusercontent.com/opencardev/prebuilts/master/udev/51-android.rules
+		    sudo wget -q --no-check-certificate -O /etc/udev/rules.d/51-android.master https://raw.githubusercontent.com/xblack86/prebuilts/master/udev/51-android.rules
 		    # File which will be transformed
 		    DEST=/etc/udev/rules.d/51-android.rules
 		    sudo touch /etc/udev/rules.d/51-android.rules
@@ -1942,10 +1942,10 @@ if [ ! -z $1 ]; then
 		sudo rm /tmp/crankshaft.md5 > /dev/null 2>&1
 		if [ ! -z $3 ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 		    if [ "$3" == "dev" ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
-			sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/csmt/crankshaft.md5
+			sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/csmt/crankshaft.md5
 		    fi
 		else
-		    sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/opencardev/prebuilts/master/csmt/crankshaft.md5
+		    sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/xblack86/prebuilts/master/csmt/crankshaft.md5
 		fi
 		REMOTE=$(cat /tmp/crankshaft.md5 | awk {'print $1'})
 		LOCAL=$(md5sum /usr/local/bin/crankshaft | awk {'print $1'})
@@ -1965,11 +1965,11 @@ if [ ! -z $1 ]; then
 			if [ ! -z $3 ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 			    if [ "$3" == "dev" ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 				cs_echo "DOWNLOAD: csmt dev"
-				sudo wget -q --no-check-certificate -O /usr/local/bin/crankshaft.update https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/csmt/crankshaft
+				sudo wget -q --no-check-certificate -O /usr/local/bin/crankshaft.update https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/csmt/crankshaft
 			    fi
 			else
 			    cs_echo "DOWNLOAD: csmt"
-			    sudo wget -q --no-check-certificate -O /usr/local/bin/crankshaft.update https://raw.githubusercontent.com/opencardev/prebuilts/master/csmt/crankshaft
+			    sudo wget -q --no-check-certificate -O /usr/local/bin/crankshaft.update https://raw.githubusercontent.com/xblack86/prebuilts/master/csmt/crankshaft
 			fi
 			# check download
 			LOCAL=$(md5sum /usr/local/bin/crankshaft.update | awk {'print $1'})
@@ -2005,10 +2005,10 @@ if [ ! -z $1 ]; then
 		sudo rm /tmp/autoapp.md5 > /dev/null 2>&1
 		if [ ! -z $3 ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 		    if [ "$3" == "dev" ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
-			sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/openauto/autoapp.md5
+			sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/openauto/autoapp.md5
 		    fi
 		else
-		    sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/opencardev/prebuilts/master/openauto/autoapp.md5
+		    sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/xblack86/prebuilts/master/openauto/autoapp.md5
 		fi
 		REMOTE=$(cat /tmp/autoapp.md5 | awk {'print $1'})
 		LOCAL=$(md5sum /usr/local/bin/autoapp | awk {'print $1'})
@@ -2029,11 +2029,11 @@ if [ ! -z $1 ]; then
 			if [ ! -z $3 ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 			    if [ "$3" == "dev" ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 				cs_echo "DOWNLOAD: openauto dev"
-				sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp.update https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/openauto/autoapp
+				sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp.update https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/openauto/autoapp
 			    fi
 			else
 			    cs_echo "DOWNLOAD: openauto"
-			    sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp.update https://raw.githubusercontent.com/opencardev/prebuilts/master/openauto/autoapp
+			    sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp.update https://raw.githubusercontent.com/xblack86/prebuilts/master/openauto/autoapp
 			fi
 			# check download
 			LOCAL=$(md5sum /usr/local/bin/autoapp.update | awk {'print $1'})
@@ -2068,10 +2068,10 @@ if [ ! -z $1 ]; then
 		sudo rm /tmp/autoapp_helper.md5 > /dev/null 2>&1
 		if [ ! -z $3 ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 		    if [ "$3" == "dev" ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
-		        sudo wget -q --no-check-certificate -O /tmp/autoapp_helper.md5 https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/openauto/autoapp_helper.md5
+		        sudo wget -q --no-check-certificate -O /tmp/autoapp_helper.md5 https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/openauto/autoapp_helper.md5
 		    fi
 		else
-		    sudo wget -q --no-check-certificate -O /tmp/autoapp_helper.md5 https://raw.githubusercontent.com/opencardev/prebuilts/master/openauto/autoapp_helper.md5
+		    sudo wget -q --no-check-certificate -O /tmp/autoapp_helper.md5 https://raw.githubusercontent.com/xblack86/prebuilts/master/openauto/autoapp_helper.md5
 		fi
 		REMOTE=$(cat /tmp/autoapp_helper.md5 | awk {'print $1'})
 		LOCAL=$(md5sum /usr/local/bin/autoapp_helper | awk {'print $1'})
@@ -2092,11 +2092,11 @@ if [ ! -z $1 ]; then
 			if [ ! -z $3 ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 			    if [ "$3" == "dev" ] || [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
 				cs_echo "DOWNLOAD: autoapp_helper dev"
-				sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp_helper.update https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/openauto/autoapp_helper
+				sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp_helper.update https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/openauto/autoapp_helper
 			    fi
 			else
 			    cs_echo "DOWNLOAD: autoapp_helper"
-			    sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp_helper.update https://raw.githubusercontent.com/opencardev/prebuilts/master/openauto/autoapp_helper
+			    sudo wget -q --no-check-certificate -O /usr/local/bin/autoapp_helper.update https://raw.githubusercontent.com/xblack86/prebuilts/master/openauto/autoapp_helper
 			fi
 			# check download
 			LOCAL=$(md5sum /usr/local/bin/autoapp_helper.update | awk {'print $1'})
@@ -2139,7 +2139,7 @@ if [ ! -z $1 ]; then
 		    DEV_LATEST_FILE=`curl 'ftp://cloud.hawknetwork.de/FTP/' 2>/dev/null | grep zip | tail -1 | rev | cut -d" " -f1 | rev`
 		    echo "ftp://cloud.hawknetwork.de/FTP/$DEV_LATEST_FILE" > /tmp/latestimage
 		else
-		    sudo wget -q --no-check-certificate -O /tmp/latestimage https://raw.githubusercontent.com/opencardev/prebuilts/master/latestimage/latest
+		    sudo wget -q --no-check-certificate -O /tmp/latestimage https://raw.githubusercontent.com/xblack86/prebuilts/master/latestimage/latest
 		fi
 		if [ "$(cat /tmp/latestimage)" != "" ]; then
 		    BUILDID_LATEST=`echo "$(basename $(cat /tmp/latestimage))" | cut -d. -f1 | rev | cut -d- -f1 | rev`
@@ -2190,9 +2190,9 @@ if [ ! -z $1 ]; then
 		    # Check udev rules
 		    sudo rm /tmp/51-android.rules.md5 > /dev/null 2>&1
 		    if [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
-			sudo wget -q -O /tmp/51-android.rules.md5 --no-check-certificate https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/udev/51-android.rules.md5
+			sudo wget -q -O /tmp/51-android.rules.md5 --no-check-certificate https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/udev/51-android.rules.md5
 		    else
-			sudo wget -q -O /tmp/51-android.rules.md5 --no-check-certificate https://raw.githubusercontent.com/opencardev/prebuilts/master/udev/51-android.rules.md5
+			sudo wget -q -O /tmp/51-android.rules.md5 --no-check-certificate https://raw.githubusercontent.com/xblack86/prebuilts/master/udev/51-android.rules.md5
 		    fi
 		    REMOTE_UDEV=$(cat /tmp/51-android.rules.md5 | awk {'print $1'})
 		    LOCAL_UDEV=$(md5sum /etc/udev/rules.d/51-android.master | awk {'print $1'})
@@ -2201,9 +2201,9 @@ if [ ! -z $1 ]; then
 		    # Check crankshaft amangement tool
 		    sudo rm /tmp/crankshaft.md5 > /dev/null 2>&1
 		    if [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
-			sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/csmt/crankshaft.md5
+			sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/csmt/crankshaft.md5
 		    else
-			sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/opencardev/prebuilts/master/csmt/crankshaft.md5
+			sudo wget -q --no-check-certificate -O /tmp/crankshaft.md5 https://raw.githubusercontent.com/xblack86/prebuilts/master/csmt/crankshaft.md5
 		    fi
 		    REMOTE_CSMT=$(cat /tmp/crankshaft.md5 | awk {'print $1'})
 		    LOCAL_CSMT=$(md5sum /usr/local/bin/crankshaft | awk {'print $1'})
@@ -2212,9 +2212,9 @@ if [ ! -z $1 ]; then
 		    # Check openauto
 		    sudo rm /tmp/autoapp.md5 > /dev/null 2>&1
 		    if [ "$(cat /etc/crankshaft.branch)" == "csng-dev" ]; then
-			sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/opencardev/prebuilts/csng-dev/openauto/autoapp.md5
+			sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/xblack86/prebuilts/csng-dev/openauto/autoapp.md5
 		    else
-			sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/opencardev/prebuilts/master/openauto/autoapp.md5
+			sudo wget -q --no-check-certificate -O /tmp/autoapp.md5 https://raw.githubusercontent.com/xblack86/prebuilts/master/openauto/autoapp.md5
 		    fi
 		    REMOTE_OPENAUTO=$(cat /tmp/autoapp.md5 | awk {'print $1'})
 		    LOCAL_OPENAUTO=$(md5sum /usr/local/bin/autoapp | awk {'print $1'})
@@ -2231,12 +2231,12 @@ if [ ! -z $1 ]; then
 			fi
 			echo "ftp://cloud.hawknetwork.de/FTP/$DEV_LATEST_FILE" > /tmp/latestimage
 		    else
-			sudo wget -q --no-check-certificate -O /tmp/latestimage https://raw.githubusercontent.com/opencardev/prebuilts/master/latestimage/latest
+			sudo wget -q --no-check-certificate -O /tmp/latestimage https://raw.githubusercontent.com/xblack86/prebuilts/master/latestimage/latest
 		    fi
 
 		    # Check latest patron image (upcoming public release)
 		    sudo rm /tmp/latestpatreon > /dev/null 2>&1
-		    sudo wget -q --no-check-certificate -O /tmp/latestpatreon https://raw.githubusercontent.com/opencardev/prebuilts/master/latestimage/patreon
+		    sudo wget -q --no-check-certificate -O /tmp/latestpatreon https://raw.githubusercontent.com/xblack86/prebuilts/master/latestimage/patreon
 
 		    # Notifications
 		    # udev
@@ -2385,24 +2385,6 @@ if [ ! -z $1 ]; then
 	else
 	    cs_echo "Automount flag: ${BOLD}${GREEN}OK${RESET}"
 	    cs_echo ""
-	fi
-	cs_echo "Checking dkms exfat module:"
-	cs_echo ""
-	if [ "$(dkms status | grep exfat | cut -d: -f2 | sed 's/ //g')" == "installed" ]; then
-	    cs_echo "Exfat module: ${BOLD}${GREEN}OK${RESET}"
-	else
-	    cs_echo "${RED}${BOLD}CSMT has detected mising exfat module!${RESET}"
-	    cs_echo "${RED}${BOLD}Trying to rebuild it...${RESET}"
-	    cs_systemrw
-	    sudo dkms autoinstall
-	    cs_systemro
-	    if [ "$(dkms status | grep exfat | cut -d: -f2 | sed 's/ //g')" == "installed" ]; then
-		cs_echo "${BOLD}${CYAN}Reboot your system to activate the fix!${RESET}"
-		cs_echo ""
-	    else
-		cs_echo "${BOLD}${CYAN}Module build failed.${RESET}"
-		cs_echo ""
-	    fi
 	fi
 	cs_echo ""
 	cs_echo "All checks done."
@@ -2672,11 +2654,14 @@ if [ ! -z $1 ]; then
 		sudo sed -i 's/^dtoverlay=pi3-disable-bt.*//' /boot/config.txt
 		sudo sed -i 's/^# Bluetooth.*//' /boot/config.txt
 		sudo sed -i '/./,/^$/!d' /boot/config.txt
+		sudo sed -i '/./,/^$/!d' /etc/rc.local
+		sudo sed -i 's/^rfkill block bluetooth.*//' /etc/rc.local
+		sudo sed -i '/./,/^$/!d' /etc/rc.local
 		sudo systemctl enable hciuart >/dev/null 2>&1
 		sudo systemctl enable bluetooth >/dev/null 2>&1
 		sudo systemctl enable ofono >/dev/null 2>&1
-                sudo sed -i 's/^ENABLE_BLUETOOTH=.*/ENABLE_BLUETOOTH=1/' /boot/crankshaft/crankshaft_env.sh
-                sudo sed -i 's/^EXTERNAL_BLUETOOTH=.*/EXTERNAL_BLUETOOTH=0/' /boot/crankshaft/crankshaft_env.sh
+        sudo sed -i 's/^ENABLE_BLUETOOTH=.*/ENABLE_BLUETOOTH=1/' /boot/crankshaft/crankshaft_env.sh
+        sudo sed -i 's/^EXTERNAL_BLUETOOTH=.*/EXTERNAL_BLUETOOTH=0/' /boot/crankshaft/crankshaft_env.sh
 		cs_bootro
 		cs_systemro
 		;;
@@ -2687,14 +2672,17 @@ if [ ! -z $1 ]; then
 		sudo sed -i 's/^dtoverlay=pi3-disable-bt.*//' /boot/config.txt
 		sudo sed -i 's/^# Bluetooth.*//' /boot/config.txt
 		sudo sed -i '/./,/^$/!d' /boot/config.txt
+		sudo sed -i '/./,/^$/!d' /etc/rc.local
+		sudo sed -i 's/^rfkill block bluetooth.*//' /etc/rc.local
+		sudo sed -i '/./,/^$/!d' /etc/rc.local
 		sudo sh -c "echo '' >> /boot/config.txt"
 		sudo sh -c "echo '# Bluetooth' >> /boot/config.txt"
 		sudo sh -c "echo 'dtoverlay=pi3-disable-bt' >> /boot/config.txt"
 		sudo systemctl disable hciuart >/dev/null 2>&1
 		sudo systemctl enable bluetooth >/dev/null 2>&1
 		sudo systemctl enable ofono >/dev/null 2>&1
-                sudo sed -i 's/^ENABLE_BLUETOOTH=.*/ENABLE_BLUETOOTH=1/' /boot/crankshaft/crankshaft_env.sh
-                sudo sed -i 's/^EXTERNAL_BLUETOOTH=.*/EXTERNAL_BLUETOOTH=1/' /boot/crankshaft/crankshaft_env.sh
+        sudo sed -i 's/^ENABLE_BLUETOOTH=.*/ENABLE_BLUETOOTH=1/' /boot/crankshaft/crankshaft_env.sh
+        sudo sed -i 's/^EXTERNAL_BLUETOOTH=.*/EXTERNAL_BLUETOOTH=1/' /boot/crankshaft/crankshaft_env.sh
 		cs_bootro
 		cs_systemro
 		;;
@@ -2705,14 +2693,20 @@ if [ ! -z $1 ]; then
 		sudo sed -i 's/^dtoverlay=pi3-disable-bt.*//' /boot/config.txt
 		sudo sed -i 's/^# Bluetooth.*//' /boot/config.txt
 		sudo sed -i '/./,/^$/!d' /boot/config.txt
+		sudo sed -i '/./,/^$/!d' /etc/rc.local
+		sudo sed -i 's/^rfkill block bluetooth.*//' /etc/rc.local
+		sudo sed -i 's/^exit 0.*//' /etc/rc.local
+		sudo sed -i '/./,/^$/!d' /etc/rc.local
 		sudo sh -c "echo '' >> /boot/config.txt"
 		sudo sh -c "echo '# Bluetooth' >> /boot/config.txt"
 		sudo sh -c "echo 'dtoverlay=pi3-disable-bt' >> /boot/config.txt"
+		sudo sh -c "echo 'rfkill block bluetooth' >> /etc/rc.local"
+		sudo sh -c "echo 'exit 0' >> /etc/rc.local"
 		sudo systemctl disable hciuart >/dev/null 2>&1
 		sudo systemctl disable bluetooth >/dev/null 2>&1
 		sudo systemctl disable ofono >/dev/null 2>&1
-                sudo sed -i 's/^ENABLE_BLUETOOTH=.*/ENABLE_BLUETOOTH=0/' /boot/crankshaft/crankshaft_env.sh
-                sudo sed -i 's/^EXTERNAL_BLUETOOTH=.*/EXTERNAL_BLUETOOTH=0/' /boot/crankshaft/crankshaft_env.sh
+        sudo sed -i 's/^ENABLE_BLUETOOTH=.*/ENABLE_BLUETOOTH=0/' /boot/crankshaft/crankshaft_env.sh
+        sudo sed -i 's/^EXTERNAL_BLUETOOTH=.*/EXTERNAL_BLUETOOTH=0/' /boot/crankshaft/crankshaft_env.sh
 		cs_bootro
 		cs_systemro
 		;;
