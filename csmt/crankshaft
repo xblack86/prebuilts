@@ -883,7 +883,7 @@ if [ ! -z $1 ]; then
 		    sudo cp -f /boot/crankshaft/openauto.ini /tmp/openauto.ini
 		else
 		    echo "[General]" > /tmp/openauto.ini
-		    echo "ShowClock=true" >> /tmp/openauto.ini
+		    echo "ShowClock=false" >> /tmp/openauto.ini
 		    echo "[Video]" >> /tmp/openauto.ini
 		    echo "FPS=1" >> /tmp/openauto.ini
 		    echo "OMXLayerIndex=0" >> /tmp/openauto.ini
