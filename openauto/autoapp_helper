@@ -31,8 +31,8 @@ if [ "${array[0]}" == "setparams" ]; then
     crankshaft filesystem system unlock
 
     # brightness values
-    sudo sed -i 's/^BR_DAY=.*/BR_DAY='$(echo ${array[4]})'/' /boot/crankshaft/crankshaft_env.sh
-    sudo sed -i 's/^BR_NIGHT=.*/BR_NIGHT='$(echo ${array[5]})'/' /boot/crankshaft/crankshaft_env.sh
+    sudo sed -i 's/^BR_DAY=.*/BR_DAY='$(echo ${array[3]})'/' /boot/crankshaft/crankshaft_env.sh
+    sudo sed -i 's/^BR_NIGHT=.*/BR_NIGHT='$(echo ${array[4]})'/' /boot/crankshaft/crankshaft_env.sh
 
         # enable hotspot
     echo "${array[1]}" >> /tmp/autoapp_helper_command
@@ -42,25 +42,10 @@ if [ "${array[0]}" == "setparams" ]; then
     echo "${array[2]}" >> /tmp/autoapp_helper_command
     sudo sed -i 's/^ENABLE_PAIRABLE=.*/ENABLE_PAIRABLE='$(echo ${array[2]})'/' /boot/crankshaft/crankshaft_env.sh
 
-    
-
-    
-    # bluetooth
-    if [ ${array[3]} == "1" ]; then
-        echo "Bluetooth:${array[3]}" >> /tmp/autoapp_helper_command
-        if [ "${array[3]}" == "none" ]; then
-            crankshaft bluetooth disable
-        elif [ "${array[3]}" == "builtin" ]; then
-            crankshaft bluetooth builtin
-        elif [ "${array[3]}" == "external" ]; then
-            crankshaft bluetooth external
-        fi
-    fi
-
-   
+       
     # wifi country
-    echo "${array[6]}" >> /tmp/autoapp_helper_command
-    sudo sed -i 's/^WIFI_COUNTRY=.*/WIFI_COUNTRY='$(echo ${array[6]})'/' /boot/crankshaft/crankshaft_env.sh
+    echo "${array[5]}" >> /tmp/autoapp_helper_command
+    sudo sed -i 's/^WIFI_COUNTRY=.*/WIFI_COUNTRY='$(echo ${array[5]})'/' /boot/crankshaft/crankshaft_env.sh
 
     
     # clean buffers
